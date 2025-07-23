@@ -1,11 +1,6 @@
 /* font-family */
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
 
-/* colors */
-/* white: #FFF */
-/* black: #000 */
-/* yellow: #FAF338 */
-
 html, body {
   height: 100%;
   margin: 0;
@@ -52,13 +47,15 @@ footer {
   background-size: 100px 100px;
   background-repeat: repeat;
   z-index: 1;
-  mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
-  -webkit-mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, #000 20%, #000 80%, transparent);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 20%, #000 80%, transparent);
 }
 
 /* 內容層絕對定位置中 */
 .footer-content {
   position: absolute;
+  max-width: 700px;
+  width: 100%;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -85,8 +82,188 @@ h2 {
   margin-bottom: 40px;
 }
 
-.temp {
-  width: 700px;
-  height: 104px;
-  background-color: #000;
+.subscription-box {
+  max-width: 688px;
+  width: 100%;
+  background-color: #FFF;
+  border-radius: 70px;
+  border-top: 2px solid #000;
+  border-right: 6px solid #000;
+  border-bottom: 2px solid #000;
+  border-left: 6px solid #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+input {
+  flex: 1; /* 自動撐滿剩下的空間 */
+  min-width: 0; /* 避免 overflow，確保能收縮 */
+  all: unset; /* 這一行會清掉大部分預設樣式 */
+  text-align: left;
+  font-weight: 800;
+  font-size: 24px;
+  line-height: 100%;
+  letter-spacing: -2%;
+  color: #000;
+  opacity: 0.5;
+  width: 100%;
+  display: block; /* 防止 inline 預設行為出問題 */
+  margin-left: 36px;
+}
+
+input::placeholder {
+  text-align: left;
+  color: #000;
+  opacity: 0.5;
+  font-weight: 800;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 100%;
+  letter-spacing: -2%;
+}
+
+button {
+  width: 184px; /* 固定寬度 */
+  flex-shrink: 0; /* 防止被壓縮 */
+  position: relative;
+  border-radius: 66px;
+  background: white;
+  z-index: 1;
+  overflow: hidden;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin: 8px;
+  text-transform: uppercase;
+}
+
+button::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 50%;
+  left: 50%;
+  width: 400%;
+  height: 400%;
+  transform: translate(-50%, -50%) rotate(0deg); /* 預設靜止 */
+  background: conic-gradient(
+    from 0deg,
+    #3958FC,
+    #3958FC,
+    #CCFF00,
+    #BD00FF,
+    #BD00FF,
+    #CCFF00
+  );
+  filter: blur(6px);
+  transition: transform 0.5s linear;
+}
+
+button:hover::before {
+  animation-name: spinReverse;
+  animation-duration: .3s;
+  animation-timing-function: linear;
+  animation-iteration-count: 1;       /* 只執行一次 */
+  animation-fill-mode: forwards;      /* 保持最後一幀 */
+}
+
+@keyframes spinReverse {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(-100deg);
+  }
+}
+
+/* 外殼（上亮下暗） */
+.outer-shell {
+  display: block;
+  margin: 2px; /* 外殼與背景之間的距離 */
+  padding: 4px;
+  border-radius: 66px;
+  background: linear-gradient(to bottom, #ffffff, #E7E7E7); /* 上白下灰 */
+  box-shadow:
+    inset 2px 2px 6px rgba(0, 0, 0, 0.08),
+    inset -2px -2px 4px rgba(255, 255, 255, 0.8);
+}
+
+/* 內殼（上暗下亮） */
+.inner-shell {
+  position: relative;
+  display: block;
+  padding: 34px;
+  border-radius: 66px;
+  background: linear-gradient(to bottom, #E7E7E7, #ffffff); /* 上灰下白 */
+  box-shadow:
+    inset 2px 2px 4px rgba(0,0,0,0.1),
+    inset -2px -2px 6px rgba(255,255,255,0.6);
+  font-weight: bold;
+  color: #03010B;
+  text-align: center;
+}
+
+/* 文字包裹層：限制大小，讓文字疊在一起 */
+.text-wrapper-outer {
+  position: absolute;
+  left: 50%;
+  right: 0;
+  top: 50%;
+  bottom: 0;
+  transform: translate(-50%, -50%);
+  height: 72px; /* 手動指定文字高度 */
+  width: 100px;
+  line-height: 24px;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.text-wrapper-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 共用文字樣式 */
+.text {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 100%;
+  letter-spacing: -2%;
+  text-transform: uppercase;
+  color: #03010B;
+}
+
+/* 初始狀態 */
+.top-text {
+  top: 0;
+  opacity: 0;
+  transform: translateY(0%);
+}
+
+.bottom-text {
+  top: 50%;
+  opacity: 1;
+  transform: translateY(-50%);
+}
+
+/* hover 時的變化 */
+button:hover .top-text {
+  opacity: 1;
+  transform: translateY(180%);
+}
+
+button:hover .bottom-text {
+  opacity: 0;
+  transform: translateY(150%);
 }
