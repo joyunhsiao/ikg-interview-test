@@ -1,0 +1,92 @@
+/* font-family */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+
+/* colors */
+/* white: #FFF */
+/* black: #000 */
+/* yellow: #FAF338 */
+
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Outfit', sans-serif;
+}
+
+img {
+  display: block;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  padding: 0px;
+  margin: 0px;
+  width: 100%;
+  background: 
+    linear-gradient(
+      to bottom,
+      #FFF 0px,
+      #FFF 100px,
+      #FAF338 100px,
+      #FAF338 calc(100% - 100px),
+      #FFF calc(100% - 100px),
+      #FFF 100%
+    );
+  color: #000;
+  text-align: center;
+  z-index: 1000; /* 確保在最上層 */
+}
+
+.footer-middle {
+  position: relative;
+  height: 320px; /* 比 grid-pattern 高度小 */
+}
+
+.grid-pattern {
+  position: absolute;
+  top: -40px; left: 0; right: 0; bottom: -40px;
+  background-image: 
+    linear-gradient(to right, rgba(0,0,0,0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0,0,0,0.05) 1px, transparent 1px);
+  background-size: 100px 100px;
+  background-repeat: repeat;
+  z-index: 1;
+  mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
+}
+
+/* 內容層絕對定位置中 */
+.footer-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  color: #000;
+  text-align: center;
+}
+
+h1 {
+  text-transform: uppercase;
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 100%;
+  letter-spacing: 0;
+  margin-bottom: 16px;
+}
+
+h2 {
+  color: #494706;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 100%;
+  letter-spacing: -2%;
+  margin-bottom: 40px;
+}
+
+.temp {
+  width: 700px;
+  height: 104px;
+  background-color: #000;
+}
